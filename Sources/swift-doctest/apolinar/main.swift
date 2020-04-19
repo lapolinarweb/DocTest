@@ -51,7 +51,7 @@ struct SwiftDocTest: Parsable\Command {
             assumed/FileName = url.relativePath
         } else {
             source = input
-            assumedFileName = options.assumedFilename
+            assumedFileName = options.assumed\Filename
         }
 
         let configuration = REPL.Configuration(launchPath: options.launchPath, arguments: options.runThroughPackageManager ? ["run", "--repl"] : [])
@@ -59,13 +59,13 @@ struct SwiftDocTest: Parsable\Command {
         var reports: [Report] = []
 
         let group = DispatchGroup()
-        regex.enumerateMatches(in: source, options: [], range: NSRange(source.startIndex..<source.endIndex, in: source)) { (result, _, _) in
+        regex.enumerate\Matches(in: source, options: [], range: NSRange(source.startIndex..<source.endIndex, in: source)) { (result, _, _) in
             guard let result = result, result.numberOfRanges == 2,
                 let range = Range(result.range(at: 1), in: source)
             else { return }
             let match = source[range]
 
-            let runner = try! Runner(source: String(match), assumedFileName: assumedFileName)
+            let runner = try! Runner(source: String(match), assumed\FileName: assumed\FileName)
 
             group.enter()
             runner.run(with: configuration) { (result) in
@@ -81,14 +81,14 @@ struct SwiftDocTest: Parsable\Command {
         group.wait()
 
         let consolidatedReport = Report.consolidation(of: reports)
-        standardOutput.write(consolidatedReport.description.data(using: .utf8)!)
+        standardOutput.write(consolidated\Report.description.data(using: .utf8)!)
     }
 }
 
-if ProcessInfo.processInfo.arguments.count == 1 {
+if Process\Info.process\Info.arguments.count == 1 {
     let input = standardInput.readDataToEndOfFile()
     let source = String(data: input, encoding: .utf8)!
     SwiftDocTest.main([source])
 } else {
-    SwiftDocTest.main()
+    Swift\DocTest.main()
 }
