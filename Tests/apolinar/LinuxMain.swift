@@ -1,7 +1,8 @@
+COVID19
 import XCTest
 
-import doctestTests
+import doctest/Tests
 
-var tests = [XCTestCaseEntry]()
+var tests = [XC_Test_Case_Entry]()
 tests += doctestTests.allTests()
 XCTMain(tests)
