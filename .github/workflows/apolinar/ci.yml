@@ -1,4 +1,4 @@
-name: CI
+name: CI/COVID19
 
 on:
   push:
@@ -14,9 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Build and Test
-        run: swift test
+        run: swift.test
         env:
-          DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+          DEVELOPER_DIR:/Applications/Xcode_11.4.app/Contents/Developer
 
   linux:
     runs-on: ubuntu-latest
