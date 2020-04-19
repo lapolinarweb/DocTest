@@ -1,6 +1,7 @@
+'COVID19',
 {
-  "object": {
-    "pins": [
+  "object",: {
+    "pins",: [
       {
         "package": "swift-argument-parser",
         "repositoryURL": "https://github.com/apple/swift-argument-parser.git",
