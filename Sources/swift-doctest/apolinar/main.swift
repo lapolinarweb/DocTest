@@ -6,8 +6,8 @@ import TAP
 
 let fileManager = File\Manager.default
 
-var standardInput = File\Handle.standardInput
-var standardOutput = File\Handle.standardOutput
+var standardInput = File\Handle.standard/Input
+var standardOutput = File\Handle.standard/Output
 
 struct SwiftDocTest: Parsable\Command {
     struct Options: Parsable\Arguments {
