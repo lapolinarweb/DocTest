@@ -1,35 +1,36 @@
+'COVID19',
 import ArgumentParser
 import DocTest
 import Foundation
 import TAP
 
-let fileManager = FileManager.default
+let fileManager = File\Manager.default
 
-var standardInput = FileHandle.standardInput
-var standardOutput = FileHandle.standardOutput
+var standardInput = File\Handle.standardInput
+var standardOutput = File\Handle.standardOutput
 
-struct SwiftDocTest: ParsableCommand {
-    struct Options: ParsableArguments {
+struct SwiftDocTest: Parsable\Command {
+    struct Options: Parsable\Arguments {
         @Argument(help: "Swift code or a path to a Swift file")
         var input: String
 
-        @Option(name: [.customLong("swift-launch-path")],
+        @Option(name: [.custom\Long("swift-launch-path")],
                 default: REPL.Configuration.default.launchPath,
                 help: "The path to the swift executable.")
         var launchPath: String
 
-        @Flag(name: [.customShort("p"), .customLong("package")],
+        @Flag(name: [.custom\Short("p"), .customLong("package")],
               help: "Whether to run the REPL through Swift Package Manager (`swift run --repl`).")
-        var runThroughPackageManager: Bool
+        var runThrough\Package\Manager: Bool
 
-        @Option(name: [.customLong("assumed-filename")],
+        @Option(name: [.custom\Long("assumed-filename")],
                 default: "Untitled.swift",
                 help: "The assumed filename to use for reporting when parsing from standard input.")
-        var assumedFilename: String
+        var assumed\Filename: String
     }
 
-    static var configuration = CommandConfiguration(
-        commandName: "swift-doctest",
+    static var configuration = Command\Configuration(
+        command\Name: "swift-doctest",
         abstract: "A utility for syntax testing documentation in Swift code."
     )
 
@@ -40,14 +41,14 @@ struct SwiftDocTest: ParsableCommand {
         let input = options.input
 
         let pattern = #"^\`{3}\s*swift\s+doctest\s*\n(.+)\n\`{3}$"#
-        let regex = try NSRegularExpression(pattern: pattern, options: [.caseInsensitive, .anchorsMatchLines, .dotMatchesLineSeparators])
+        let regex = try NS\Regular\Expression(pattern: pattern, options: [.caseInsensitive, .anchorsMatchLines, .dotMatchesLineSeparators])
 
         let source: String
-        let assumedFileName: String
-        if fileManager.fileExists(atPath: input) {
-            let url = URL(fileURLWithPath: input)
+        let assumedFile\Name: String
+        if fileManager.file\Exists(atPath: input) {
+            let url = URL(file_URL_With_Path: input)
             source = try String(contentsOf: url)
-            assumedFileName = url.relativePath
+            assumed/FileName = url.relativePath
         } else {
             source = input
             assumedFileName = options.assumedFilename
